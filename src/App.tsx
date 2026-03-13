@@ -107,7 +107,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#f8f9fa] text-slate-900 font-sans selection:bg-indigo-100">
       {/* Header */}
-      <header className="p-4 md:p-6 border-b border-slate-200 bg-white/80 backdrop-blur-md sticky top-0 z-30 flex justify-between items-center">
+      <header className="h-[72px] md:h-20 border-b border-slate-200 bg-white/80 backdrop-blur-md sticky top-0 z-30 flex justify-between items-center px-4 md:px-6">
         <div>
           <h1 className="text-lg md:text-2xl font-bold tracking-tight text-slate-900 flex items-center gap-2">
             <span className="bg-indigo-600 text-white p-1.5 rounded-lg">
@@ -128,95 +128,9 @@ export default function App() {
       </header>
 
       <main className="max-w-6xl mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
-        {/* Sidebar Controls - Lower priority on mobile */}
-        <aside className="lg:col-span-1 space-y-4 md:space-y-6 order-2 lg:order-1">
-          <section className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
-              <Settings2 size={16} /> 透镜设置
-            </h2>
-            <div className="flex p-1 bg-slate-100 rounded-xl">
-              <button
-                onClick={() => setLensType('convex')}
-                className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all ${lensType === 'convex' ? 'bg-white shadow-sm text-indigo-600' : 'text-slate-500 hover:text-slate-700'}`}
-              >
-                凸透镜
-              </button>
-              <button
-                onClick={() => setLensType('concave')}
-                className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all ${lensType === 'concave' ? 'bg-white shadow-sm text-indigo-600' : 'text-slate-500 hover:text-slate-700'}`}
-              >
-                凹透镜
-              </button>
-            </div>
-          </section>
-
-          <section className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
-              <MoveHorizontal size={16} /> 物距调节 (u)
-            </h2>
-            <div className="space-y-4">
-              <div className="flex justify-between text-xs font-mono text-slate-500">
-                <span>远</span>
-                <span>{objectDistance}px</span>
-                <span>近</span>
-              </div>
-              <input
-                type="range"
-                min="20"
-                max="380"
-                value={400 - objectDistance}
-                onChange={(e) => setObjectDistance(400 - Number(e.target.value))}
-                className="w-full accent-indigo-600"
-              />
-              <div className="grid grid-cols-3 gap-2">
-                <button onClick={() => setPreset('>2f')} className="text-[10px] py-1 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-md transition-colors">u &gt; 2f</button>
-                <button onClick={() => setPreset('f-2f')} className="text-[10px] py-1 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-md transition-colors">f &lt; u &lt; 2f</button>
-                <button onClick={() => setPreset('<f')} className="text-[10px] py-1 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-md transition-colors">u &lt; f</button>
-              </div>
-            </div>
-          </section>
-
-          <section className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
-              <Eye size={16} /> 观测屏位置 (v)
-            </h2>
-            <div className="space-y-4">
-              <div className="flex justify-between text-xs font-mono text-slate-500">
-                <span>透镜</span>
-                <span>{screenDistance}px</span>
-                <span>远</span>
-              </div>
-              <input
-                type="range"
-                min="0"
-                max="380"
-                value={screenDistance}
-                onChange={(e) => setScreenDistance(Number(e.target.value))}
-                className="w-full accent-emerald-500"
-              />
-              <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                <p className="text-xs text-slate-500 leading-relaxed">
-                  移动观测屏来寻找清晰的实像。虚像无法在屏上呈现，但可以通过眼睛观察。
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <div className="flex items-center gap-2 px-2">
-            <input 
-              type="checkbox" 
-              id="rays" 
-              checked={showRays} 
-              onChange={() => setShowRays(!showRays)}
-              className="rounded text-indigo-600 focus:ring-indigo-500"
-            />
-            <label htmlFor="rays" className="text-sm text-slate-600 cursor-pointer">显示辅助光线</label>
-          </div>
-        </aside>
-
-        {/* Simulation Canvas - Sticky on mobile */}
-        <div className="lg:col-span-3 space-y-4 md:space-y-6 order-1 lg:order-2">
-          <div className="bg-white rounded-2xl md:rounded-3xl shadow-xl border border-slate-200 overflow-hidden relative group sticky top-[73px] lg:static z-20">
+        {/* 1. Simulation Canvas - Persistent Sticky on mobile */}
+        <div className="lg:col-span-3 order-1 lg:order-2 sticky top-[88px] lg:static z-20 self-start">
+          <div className="bg-white rounded-2xl md:rounded-3xl shadow-xl border border-slate-200 overflow-hidden relative group">
             <div className="absolute top-3 left-3 z-10 flex gap-2">
               <span className="px-2 py-0.5 bg-slate-900/80 text-white text-[8px] md:text-[10px] font-bold rounded-full backdrop-blur-sm uppercase tracking-widest">
                 Simulation
@@ -370,7 +284,96 @@ export default function App() {
               </div>
             </div>
           </div>
+        </div>
 
+        {/* 2. Sidebar Controls - Scrollable below simulation on mobile */}
+        <aside className="lg:col-span-1 space-y-4 md:space-y-6 order-2 lg:order-1">
+          <section className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
+              <Settings2 size={16} /> 透镜设置
+            </h2>
+            <div className="flex p-1 bg-slate-100 rounded-xl">
+              <button
+                onClick={() => setLensType('convex')}
+                className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all ${lensType === 'convex' ? 'bg-white shadow-sm text-indigo-600' : 'text-slate-500 hover:text-slate-700'}`}
+              >
+                凸透镜
+              </button>
+              <button
+                onClick={() => setLensType('concave')}
+                className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all ${lensType === 'concave' ? 'bg-white shadow-sm text-indigo-600' : 'text-slate-500 hover:text-slate-700'}`}
+              >
+                凹透镜
+              </button>
+            </div>
+          </section>
+
+          <section className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
+              <MoveHorizontal size={16} /> 物距调节 (u)
+            </h2>
+            <div className="space-y-4">
+              <div className="flex justify-between text-xs font-mono text-slate-500">
+                <span>远</span>
+                <span>{objectDistance}px</span>
+                <span>近</span>
+              </div>
+              <input
+                type="range"
+                min="20"
+                max="380"
+                value={400 - objectDistance}
+                onChange={(e) => setObjectDistance(400 - Number(e.target.value))}
+                className="w-full accent-indigo-600"
+              />
+              <div className="grid grid-cols-3 gap-2">
+                <button onClick={() => setPreset('>2f')} className="text-[10px] py-1 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-md transition-colors">u &gt; 2f</button>
+                <button onClick={() => setPreset('f-2f')} className="text-[10px] py-1 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-md transition-colors">f &lt; u &lt; 2f</button>
+                <button onClick={() => setPreset('<f')} className="text-[10px] py-1 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-md transition-colors">u &lt; f</button>
+              </div>
+            </div>
+          </section>
+
+          <section className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
+              <Eye size={16} /> 观测屏位置 (v)
+            </h2>
+            <div className="space-y-4">
+              <div className="flex justify-between text-xs font-mono text-slate-500">
+                <span>透镜</span>
+                <span>{screenDistance}px</span>
+                <span>远</span>
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="380"
+                value={screenDistance}
+                onChange={(e) => setScreenDistance(Number(e.target.value))}
+                className="w-full accent-emerald-500"
+              />
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                <p className="text-xs text-slate-500 leading-relaxed">
+                  移动观测屏来寻找清晰的实像。虚像无法在屏上呈现，但可以通过眼睛观察。
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <div className="flex items-center gap-2 px-2">
+            <input 
+              type="checkbox" 
+              id="rays" 
+              checked={showRays} 
+              onChange={() => setShowRays(!showRays)}
+              className="rounded text-indigo-600 focus:ring-indigo-500"
+            />
+            <label htmlFor="rays" className="text-sm text-slate-600 cursor-pointer">显示辅助光线</label>
+          </div>
+        </aside>
+
+        {/* 3. Analysis Section - Below controls on mobile */}
+        <div className="lg:col-span-3 space-y-4 md:space-y-6 order-3 lg:order-3">
           {/* Analysis Section */}
           <AnimatePresence>
             {showInfo && (
