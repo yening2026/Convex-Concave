@@ -156,22 +156,22 @@ export default function App() {
             </h2>
             <div className="space-y-4">
               <div className="flex justify-between text-xs font-mono text-slate-500">
-                <span>近</span>
-                <span>{objectDistance}px</span>
                 <span>远</span>
+                <span>{objectDistance}px</span>
+                <span>近</span>
               </div>
               <input
                 type="range"
                 min="20"
                 max="380"
-                value={objectDistance}
-                onChange={(e) => setObjectDistance(Number(e.target.value))}
+                value={400 - objectDistance}
+                onChange={(e) => setObjectDistance(400 - Number(e.target.value))}
                 className="w-full accent-indigo-600"
               />
               <div className="grid grid-cols-3 gap-2">
-                <button onClick={() => setPreset('>2f')} className="text-[10px] py-1 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-md transition-colors">u &gt; 2f</button>
-                <button onClick={() => setPreset('f-2f')} className="text-[10px] py-1 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-md transition-colors">f &lt; u &lt; 2f</button>
-                <button onClick={() => setPreset('<f')} className="text-[10px] py-1 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-md transition-colors">u &lt; f</button>
+                <button onClick={() => setPreset('>2f')} className="text-[10px] py-1 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-md transition-colors">u > 2f</button>
+                <button onClick={() => setPreset('f-2f')} className="text-[10px] py-1 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-md transition-colors">f < u < 2f</button>
+                <button onClick={() => setPreset('<f')} className="text-[10px] py-1 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-md transition-colors">u < f</button>
               </div>
             </div>
           </section>
@@ -216,16 +216,16 @@ export default function App() {
 
         {/* Simulation Canvas - Sticky on mobile */}
         <div className="lg:col-span-3 space-y-4 md:space-y-6 order-1 lg:order-2">
-          <div className="bg-white rounded-2xl md:rounded-3xl shadow-xl border border-slate-200 overflow-hidden relative group sticky top-[81px] lg:static z-20">
-            <div className="absolute top-4 left-4 z-10 flex gap-2">
-              <span className="px-3 py-1 bg-slate-900/80 text-white text-[10px] font-bold rounded-full backdrop-blur-sm uppercase tracking-widest">
-                Simulation View
+          <div className="bg-white rounded-2xl md:rounded-3xl shadow-xl border border-slate-200 overflow-hidden relative group sticky top-[73px] lg:static z-20">
+            <div className="absolute top-3 left-3 z-10 flex gap-2">
+              <span className="px-2 py-0.5 bg-slate-900/80 text-white text-[8px] md:text-[10px] font-bold rounded-full backdrop-blur-sm uppercase tracking-widest">
+                Simulation
               </span>
               {Math.abs(screenDistance - v) < 5 && isReal && (
                 <motion.span 
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="px-3 py-1 bg-emerald-500 text-white text-[10px] font-bold rounded-full shadow-lg shadow-emerald-200"
+                  className="px-2 py-0.5 bg-emerald-500 text-white text-[8px] md:text-[10px] font-bold rounded-full shadow-lg shadow-emerald-200"
                 >
                   成像清晰
                 </motion.span>
@@ -349,21 +349,21 @@ export default function App() {
               )}
             </svg>
 
-            {/* Canvas Overlay Info */}
-            <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 bg-white/90 backdrop-blur-sm p-2 md:p-4 rounded-xl md:rounded-2xl border border-slate-200 shadow-lg text-[10px] md:text-xs space-y-1 md:space-y-2 min-w-[120px] md:min-w-[160px]">
-              <div className="flex justify-between border-b border-slate-100 pb-1">
-                <span className="text-slate-400">物距 (u)</span>
+            {/* Canvas Overlay Info - Moved to Top Right and Shrunk */}
+            <div className="absolute top-2 right-2 md:top-4 md:right-4 bg-white/80 backdrop-blur-md p-1.5 md:p-3 rounded-lg md:rounded-xl border border-white/50 shadow-lg text-[9px] md:text-xs space-y-1 min-w-[100px] md:min-w-[140px] pointer-events-none">
+              <div className="flex justify-between border-b border-slate-100/50 pb-0.5">
+                <span className="text-slate-500">物距 (u)</span>
                 <span className="font-mono font-bold text-indigo-600">{objectDistance}px</span>
               </div>
-              <div className="flex justify-between border-b border-slate-100 pb-1">
-                <span className="text-slate-400">像距 (v)</span>
+              <div className="flex justify-between border-b border-slate-100/50 pb-0.5">
+                <span className="text-slate-500">像距 (v)</span>
                 <span className="font-mono font-bold text-indigo-600">
                   {v === Infinity ? '∞' : `${Math.abs(Math.round(v))}px`}
-                  <span className="text-[8px] md:text-[10px] ml-1 font-normal">({isReal ? '实' : '虚'})</span>
+                  <span className="text-[7px] md:text-[9px] ml-0.5 font-normal">({isReal ? '实' : '虚'})</span>
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-400">放大率 (M)</span>
+                <span className="text-slate-500">放大率 (M)</span>
                 <span className="font-mono font-bold text-indigo-600">
                   {Math.abs(magnification).toFixed(2)}x
                 </span>
