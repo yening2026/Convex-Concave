@@ -107,29 +107,29 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#f8f9fa] text-slate-900 font-sans selection:bg-indigo-100">
       {/* Header */}
-      <header className="p-6 border-b border-slate-200 bg-white/80 backdrop-blur-md sticky top-0 z-10 flex justify-between items-center">
+      <header className="p-4 md:p-6 border-b border-slate-200 bg-white/80 backdrop-blur-md sticky top-0 z-30 flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 flex items-center gap-2">
+          <h1 className="text-lg md:text-2xl font-bold tracking-tight text-slate-900 flex items-center gap-2">
             <span className="bg-indigo-600 text-white p-1.5 rounded-lg">
-              <Maximize2 size={20} />
+              <Maximize2 size={18} className="md:w-5 md:h-5" />
             </span>
-            光学实验室：透镜成像
+            光学实验室
           </h1>
-          <p className="text-slate-500 text-sm mt-1">交互式物理实验演示：凸透镜与凹透镜对光线的折射</p>
+          <p className="text-slate-500 text-[10px] md:text-sm mt-0.5">透镜成像交互实验</p>
         </div>
         <div className="flex gap-2">
           <button 
             onClick={() => setShowInfo(!showInfo)}
             className={`p-2 rounded-full transition-colors ${showInfo ? 'bg-indigo-50 text-indigo-600' : 'hover:bg-slate-100 text-slate-400'}`}
           >
-            <Info size={20} />
+            <Info size={18} className="md:w-5 md:h-5" />
           </button>
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
-        {/* Sidebar Controls */}
-        <aside className="lg:col-span-1 space-y-6">
+      <main className="max-w-6xl mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+        {/* Sidebar Controls - Lower priority on mobile */}
+        <aside className="lg:col-span-1 space-y-4 md:space-y-6 order-2 lg:order-1">
           <section className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
             <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
               <Settings2 size={16} /> 透镜设置
@@ -214,9 +214,9 @@ export default function App() {
           </div>
         </aside>
 
-        {/* Simulation Canvas */}
-        <div className="lg:col-span-3 space-y-6">
-          <div className="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden relative group">
+        {/* Simulation Canvas - Sticky on mobile */}
+        <div className="lg:col-span-3 space-y-4 md:space-y-6 order-1 lg:order-2">
+          <div className="bg-white rounded-2xl md:rounded-3xl shadow-xl border border-slate-200 overflow-hidden relative group sticky top-[81px] lg:static z-20">
             <div className="absolute top-4 left-4 z-10 flex gap-2">
               <span className="px-3 py-1 bg-slate-900/80 text-white text-[10px] font-bold rounded-full backdrop-blur-sm uppercase tracking-widest">
                 Simulation View
@@ -350,7 +350,7 @@ export default function App() {
             </svg>
 
             {/* Canvas Overlay Info */}
-            <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm p-4 rounded-2xl border border-slate-200 shadow-lg text-xs space-y-2 min-w-[160px]">
+            <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 bg-white/90 backdrop-blur-sm p-2 md:p-4 rounded-xl md:rounded-2xl border border-slate-200 shadow-lg text-[10px] md:text-xs space-y-1 md:space-y-2 min-w-[120px] md:min-w-[160px]">
               <div className="flex justify-between border-b border-slate-100 pb-1">
                 <span className="text-slate-400">物距 (u)</span>
                 <span className="font-mono font-bold text-indigo-600">{objectDistance}px</span>
@@ -359,7 +359,7 @@ export default function App() {
                 <span className="text-slate-400">像距 (v)</span>
                 <span className="font-mono font-bold text-indigo-600">
                   {v === Infinity ? '∞' : `${Math.abs(Math.round(v))}px`}
-                  <span className="text-[10px] ml-1 font-normal">({isReal ? '实' : '虚'})</span>
+                  <span className="text-[8px] md:text-[10px] ml-1 font-normal">({isReal ? '实' : '虚'})</span>
                 </span>
               </div>
               <div className="flex justify-between">
@@ -378,25 +378,25 @@ export default function App() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
-                className="bg-indigo-600 rounded-3xl p-8 text-white shadow-xl shadow-indigo-200"
+                className="bg-indigo-600 rounded-2xl md:rounded-3xl p-4 md:p-8 text-white shadow-xl shadow-indigo-200"
               >
-                <div className="flex flex-col md:flex-row gap-8 items-center">
-                  <div className="flex-1 space-y-4">
-                    <h3 className="text-xl font-bold flex items-center gap-2">
+                <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-center">
+                  <div className="flex-1 w-full space-y-4">
+                    <h3 className="text-lg md:text-xl font-bold flex items-center gap-2">
                       成像规律分析
                     </h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="bg-white/10 p-4 rounded-2xl backdrop-blur-sm">
-                        <p className="text-indigo-100 text-xs uppercase tracking-wider font-bold mb-1">成像性质</p>
-                        <p className="text-lg font-medium">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+                      <div className="bg-white/10 p-3 md:p-4 rounded-xl md:rounded-2xl backdrop-blur-sm">
+                        <p className="text-indigo-100 text-[10px] md:text-xs uppercase tracking-wider font-bold mb-1">成像性质</p>
+                        <p className="text-sm md:text-lg font-medium">
                           {v === Infinity ? '不成像 (平行光)' : (
                             `${isReal ? '实像' : '虚像'} · ${isUpright ? '正立' : '倒立'} · ${isMagnified ? '放大' : (Math.abs(magnification) === 1 ? '等大' : '缩小')}`
                           )}
                         </p>
                       </div>
-                      <div className="bg-white/10 p-4 rounded-2xl backdrop-blur-sm">
-                        <p className="text-indigo-100 text-xs uppercase tracking-wider font-bold mb-1">应用场景</p>
-                        <p className="text-lg font-medium">
+                      <div className="bg-white/10 p-3 md:p-4 rounded-xl md:rounded-2xl backdrop-blur-sm">
+                        <p className="text-indigo-100 text-[10px] md:text-xs uppercase tracking-wider font-bold mb-1">应用场景</p>
+                        <p className="text-sm md:text-lg font-medium">
                           {lensType === 'convex' ? (
                             objectDistance > 2 * FOCAL_LENGTH ? '照相机' :
                             objectDistance === 2 * FOCAL_LENGTH ? '测焦距' :
@@ -407,15 +407,14 @@ export default function App() {
                       </div>
                     </div>
                   </div>
-                  <div className="w-full md:w-64 aspect-square bg-white/5 rounded-2xl flex flex-col items-center justify-center p-6 border border-white/10">
+                  <div className="w-full md:w-64 aspect-auto md:aspect-square bg-white/5 rounded-xl md:rounded-2xl flex flex-col items-center justify-center p-4 md:p-6 border border-white/10">
                     <div className="text-center">
-                      <p className="text-indigo-200 text-xs mb-2">透镜公式</p>
-                      <p className="text-2xl font-serif italic">1/v - 1/u = 1/f</p>
-                      <div className="mt-6 space-y-2 text-[11px] text-indigo-100/80">
+                      <p className="text-indigo-200 text-[10px] md:text-xs mb-1 md:mb-2">透镜公式</p>
+                      <p className="text-lg md:text-2xl font-serif italic">1/v - 1/u = 1/f</p>
+                      <div className="mt-4 md:mt-6 flex md:block gap-4 md:space-y-2 text-[9px] md:text-[11px] text-indigo-100/80">
                         <p>• 凸透镜 f &gt; 0</p>
                         <p>• 凹透镜 f &lt; 0</p>
                         <p>• v &gt; 0 为实像</p>
-                        <p>• v &lt; 0 为虚像</p>
                       </div>
                     </div>
                   </div>
