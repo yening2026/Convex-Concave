@@ -1,0 +1,5 @@
+{
+  "name": "Optics Lab: Lens Simulation",
+  "description": "An interactive physics simulation demonstrating light refraction through convex and concave lenses with adjustable object positions.",
+  "requestFramePermissions": []
+}
