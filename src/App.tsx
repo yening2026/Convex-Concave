@@ -169,9 +169,9 @@ export default function App() {
                 className="w-full accent-indigo-600"
               />
               <div className="grid grid-cols-3 gap-2">
-                <button onClick={() => setPreset('>2f')} className="text-[10px] py-1 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-md transition-colors">u > 2f</button>
-                <button onClick={() => setPreset('f-2f')} className="text-[10px] py-1 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-md transition-colors">f < u < 2f</button>
-                <button onClick={() => setPreset('<f')} className="text-[10px] py-1 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-md transition-colors">u < f</button>
+                <button onClick={() => setPreset('>2f')} className="text-[10px] py-1 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-md transition-colors">u &gt; 2f</button>
+                <button onClick={() => setPreset('f-2f')} className="text-[10px] py-1 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-md transition-colors">f &lt; u &lt; 2f</button>
+                <button onClick={() => setPreset('<f')} className="text-[10px] py-1 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-md transition-colors">u &lt; f</button>
               </div>
             </div>
           </section>
